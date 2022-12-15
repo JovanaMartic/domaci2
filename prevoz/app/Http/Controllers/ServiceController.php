@@ -14,7 +14,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::all();
+        return $services;
     }
 
     /**
@@ -44,9 +45,12 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show($service_id)
     {
-        //
+        $service = Service::find($service_id);
+        if (is_null($service))
+            return response()->json('Data not found', 404);
+        return response()->json($service);
     }
 
     /**

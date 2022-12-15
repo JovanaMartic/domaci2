@@ -34,26 +34,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users', [UserController::class, 'index']);
+
+Route::get('/users/{id}', [UserController::class, 'show']);
 
 
-// Route::get('/users/{id}/posts', [UserPostController::class, 'index'])->name('users.posts.index');
-// ili
-Route::resource('users.posts', UserPostController::class)->only(['index']);
 
-Route::post('/register', [AuthController::class, 'register']);
+Route::get('/services', [ServiceController::class, 'index']);
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::get('/services/{id}', [ServiceController::class, 'show']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profile', function (Request $request) {
-        return auth()->user();
-    });
 
-    Route::resource('posts', PostController::class)->only(['update', 'store', 'destroy']);
 
-    Route::post('/logout', [AuthController::class, 'logout']);
-});
+Route::resource('reviews', ReviewController::class)->only(['index']);
 
-Route::resource('posts', PostController::class)->only(['index']);
+
+Route::get('/service/{id}/review', [ServiceReviewController::class, 'index'])->name('service.review.index');
+
+
+// Route::post('/register', [AuthController::class, 'register']);
+
+// Route::post('/login', [AuthController::class, 'login']);
