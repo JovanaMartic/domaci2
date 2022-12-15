@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReviewsTable extends Migration
+class AddColumnPriceToServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
-            $table->integer('rate');
-            $table->text('body');
-            $table->timestamps();
-           // $table->timestamps('published');
+        Schema::table('services', function (Blueprint $table) {
+            $table->integer('price');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reviews');
+        Schema::table('services', function (Blueprint $table) {
+            $table->dropColumn('price');
+        });
     }
-}
+};
