@@ -51,6 +51,22 @@ Route::resource('reviews', ReviewController::class)->only(['index']);
 
 Route::get('/service/{id}/review', [ServiceReviewController::class, 'index'])->name('service.review.index');
 
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::delete('review/{id}', [ReviewController::class, 'destroy']);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function (Request $request) {
+        return auth()->user();
+    });
+
+
+Route::post('/logout', [AuthController::class, 'logout']);
+});
+
 
 // Route::post('/register', [AuthController::class, 'register']);
 
