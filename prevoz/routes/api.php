@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ServiceReviewController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,7 +35,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::resource('posts', PostController::class);
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
+Route::get('/greeting', function () {
+    return 'Hello World';
+});
 
 
 Route::get('/users', [UserController::class, 'index']);
